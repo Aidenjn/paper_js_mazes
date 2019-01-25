@@ -6,16 +6,77 @@
 <!-- Define inlined PaperScript associate it with myCanvas -->
 <script type="text/paperscript" canvas="myCanvas">
 
-// Create a Paper.js Path to draw a line into it:
-var path = new Path();
-// Give the stroke a color
-path.strokeColor = 'black';
-var start = new Point(100, 100);
-// Move to start and draw a line from there
-path.moveTo(start);
-// Note the plus operator on Point objects.
-// PaperScript does that for us, and much more!
-path.lineTo(start + [ 100, -50 ]);
+// ****** Begin JavaScript ****** 
+
+
+function buildCell(xCoord, yCoord) {
+    var cell = {
+        x:      xCoord,
+        y:      yCoord,
+        type:   "Normal",
+        north:  true,
+        east:   true,
+        south:  true,
+        west:   true
+    };
+    
+    return cell;
+}
+
+// Initialize matrix
+function initMatrix(cellAmount) {
+    var matrix = new Array(cellAmount);
+    for (var i = 0; i < matrix.length; i++) {
+        matrix[i] = new Array(cellAmount);
+    }
+    return matrix;
+}
+
+// Fill the matrix
+function fillMatrix(m) {
+    for (var i = 0; i < m.length; i++) {
+        for (var j = 0; j < m[i].length; j++) {
+            m[i][j] = buildCell(i, j);
+        }
+    }
+}
+
+function drawCell(c, size, xCoord, yCoord) {
+    console.log(c.type);
+    console.log(c.x);
+    console.log(c.y);
+    
+    var path = new Path();
+    path.strokeColor = 'black';
+    var start = new Point(xCoord, yCoord);
+    path.moveTo(start);
+    path.lineTo(start + [size, 0]);
+    path.strokeColor = 'red';
+    path.lineTo(start + [size, -size]);
+    path.strokeColor = 'green';
+    path.lineTo(start + [0, -size]);
+    path.strokeColor = 'blue';
+    path.lineTo(start + [0, 0]);
+}
+
+
+// Draw the matrix
+function drawMatrix(m, size, xCoord, yCoord) {
+    cellSize = size / m.length;
+    console.log("cellsize: " + cellSize);
+    for (var i = 0; i < m.length; i++) {
+        for (var j = 0; j < m[i].length; j++) {
+            drawCell(m[i][j], cellSize, xCoord + (cellSize * i), yCoord + (cellSize * j))
+        }
+    }
+}
+
+grid = initMatrix(10);
+fillMatrix(grid);
+drawMatrix(grid, 100, 10, 10);
+
+
+// ****** End JavaScript ****** 
 
 </script>
 </head>
