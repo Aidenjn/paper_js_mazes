@@ -8,16 +8,70 @@
 
 // ****** Begin JavaScript ****** 
 
+function cellConstructor(r, c) {
+    var cell = {
+        row:    r,
+        column: c,
+        links:  {},
+        type:   "Normal",
+        north:  false,
+        east:   false,
+        south:  false,
+        west:   false,
+        
+        // Function: link
+        // Parameters: Cell to link, bidirectional option
+        // Description: Links the cell to another
+        link: function(c, bidi) {
+            this.links[c] = true;
+            if (bidi === true)
+                c.link(self, false);
+        },
+        // Function: unlink
+        // Parameters: Cell to unlink, bidirectional option
+        // Description: unlinks the cell from another
+        unlink: function(c, bidi) {
+            delete this.links[c];
+            if (bidi === true)
+                c.link(self, false);
+        },
+        // Function: getLinks
+        // Parameters: none
+        // Description: Returns a list of linked cells
+        getLinks: function() {
+            return Object.keys(this.links);
+        },
+        // Function: hasLink
+        // Parameters: Cell
+        // Description: Returns weither the cell has a link to the onther cell
+        hasLink: function(c) {
+            return links(cell) === true;
+        },
+        // Function: getNeighbors
+        // Parameters: none
+        // Description: Returns a list of neighboring cells
+        getNeighbors: function() {
+            list = [];
+            if (this.north)
+                list.push(this.north);
+            if (this.east)
+                list.push(this.east);
+            if (this.south)
+                list.push(this.south);
+            if (this.west)
+                list.push(this.west);
+            return list;
+        }
+    };
+}
+
+
 
 function buildCell(xCoord, yCoord) {
     var cell = {
         x:      xCoord,
         y:      yCoord,
-        type:   "Normal",
-        north:  true,
-        east:   true,
-        south:  true,
-        west:   true
+        
     };
     
     return cell;
@@ -73,7 +127,7 @@ function drawMatrix(m, size, xCoord, yCoord) {
 
 grid = initMatrix(10);
 fillMatrix(grid);
-drawMatrix(grid, 100, 10, 10);
+drawMatrix(grid, 200, 20, 20);
 
 
 // ****** End JavaScript ****** 
