@@ -58,8 +58,6 @@ function cellConstructor(r, c) {
                 return false;
             else
                 return (c.getKey() in this.links);
-//            if ((c.getKey in this.links) && (this.links[c.getKey] === true))
-//                return this.links[c.getKey];
         },
         // Function: getNeighbors
         // Parameters: none
@@ -138,53 +136,6 @@ function gridConstructor(r, c) {
     return grid;
 }
 
-
-//function buildCell(xCoord, yCoord) {
-//    var cell = {
-//        x:      xCoord,
-//        y:      yCoord,
-//        
-//    };
-//    
-//    return cell;
-//}
-//
-//// Initialize matrix
-//function initMatrix(cellAmount) {
-//    var matrix = new Array(cellAmount);
-//    for (var i = 0; i < matrix.length; i++) {
-//        matrix[i] = new Array(cellAmount);
-//    }
-//    return matrix;
-//}
-//
-//// Fill the matrix
-//function fillMatrix(m) {
-//    for (var i = 0; i < m.length; i++) {
-//        for (var j = 0; j < m[i].length; j++) {
-//            m[i][j] = buildCell(i, j);
-//        }
-//    }
-//}
-
-//function drawCell(c, size, xCoord, yCoord) {
-////    console.log(c.type);
-////    console.log(c.x);
-////    console.log(c.y);
-//    
-//    var path = new Path();
-//    path.strokeColor = 'black';
-//    var start = new Point(xCoord, yCoord);
-//    path.moveTo(start);
-//    path.lineTo(start + [size, 0]);
-//    path.strokeColor = 'red';
-//    path.lineTo(start + [size, -size]);
-//    path.strokeColor = 'green';
-//    path.lineTo(start + [0, -size]);
-//    path.strokeColor = 'blue';
-//    path.lineTo(start + [0, 0]);
-//}
-
 function drawCell(c, size, xCoord, yCoord) {
   
     var x1 = yCoord;
@@ -212,30 +163,7 @@ function drawCell(c, size, xCoord, yCoord) {
         eastPath.strokeColor = 'black';
         eastPath.add(new Point(x2, y1), new Point(x2, y2));
     }
-    
-    
-    
-//    path.moveTo(start);
-//    path.lineTo(start + [size, 0]);
-//    path.strokeColor = 'red';
-//    path.lineTo(start + [size, -size]);
-//    path.strokeColor = 'green';
-//    path.lineTo(start + [0, -size]);
-//    path.strokeColor = 'blue';
-//    path.lineTo(start + [0, 0]);
 }
-
-
-// Draw the matrix
-//function drawMatrix(m, size, xCoord, yCoord) {
-//    cellSize = size / m.length;
-//    console.log("cellsize: " + cellSize);
-//    for (var i = 0; i < m.length; i++) {
-//        for (var j = 0; j < m[i].length; j++) {
-//            drawCell(m[i][j], cellSize, xCoord + (cellSize * i), yCoord + (cellSize * j))
-//        }
-//    }
-//}
 
 
 // Function: drawGrid
@@ -243,7 +171,6 @@ function drawCell(c, size, xCoord, yCoord) {
 // Description: Draw graphical representation of grid
 function drawGrid(grid, size, xCoord, yCoord) {
     cellSize = size / grid.rows;
-    console.log("cellsize: " + cellSize);
     for (var x = 0; x < grid.rows; x++) {
         for (var y = 0; y < grid.columns; y++) {
             drawCell(grid.getCell(x, y), cellSize, xCoord + (cellSize * x), yCoord + (cellSize * y));
@@ -251,26 +178,40 @@ function drawGrid(grid, size, xCoord, yCoord) {
     }
 }
 
-//grid = initMatrix(10);
-//fillMatrix(grid);
-//drawMatrix(grid, 200, 20, 20);
+// Function: btMaze
+// Parameters: grid object
+// Description: Uses the binary tree algorithm to turn a grid object into a randomly generated maze.
+function binaryTree(grid) {
+    for (var x = 0; x < grid.rows; x++) {
+        for (var y = 0; y < grid.columns; y++) {
+            currentCell = g.getCell(x, y);
+            var possibleDirections = [];
+            if (x > 0)
+                possibleDirections.push(currentCell.north);
+            if (y > 0)
+                possibleDirections.push(currentCell.west);
+            
+            randNum = Math.floor(Math.random() * possibleDirections.length) 
+            chosenDirection = possibleDirections[randNum];
+            
+            if (possibleDirections.length > 0)
+                currentCell.link(chosenDirection, true);
+        }
+    }
+}
 
-var c = cellConstructor(0, 0);
-var g = gridConstructor(6, 6);
-//g.init();
 
-//console.log(c.getKey());
-(g.getCell(0, 0)).link(g.getCell(0, 1), true);
-console.log((g.getCell(0, 0)).hasLink(g.getCell(0, 1)));
-console.log((g.getCell(0, 0)).hasLink(g.getCell(1, 0)));
+//var c = cellConstructor(0, 0);
+var g = gridConstructor(10, 10);
+
+//g.getCell(0, 0).link(g.getCell(0, 1), true);
+
 //g.getCell(0, 2).link(g.getCell(0, 3), true);
-console.log(g.getCell(0, 0), g.getCell(1, 0), g.getCell(0, 1));
+//console.log(g.getCell(0, 0), g.getCell(1, 0), g.getCell(0, 1));
 
-drawGrid(g, 200, 20, 20);
-console.log(g.getCell(0, 0));
-//console.log(g.cells[0][0].row);
+binaryTree(g);
 
-//drawCell(c, 20, 100, 100);
+drawGrid(g, 100, 20, 20);
 
 // ****** End JavaScript ****** 
 
