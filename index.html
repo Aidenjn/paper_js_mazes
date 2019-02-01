@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Page styling -->
+<link rel="stylesheet" href="style.css">
 <!-- Load the Paper.js library -->
 <script type="text/javascript" src="node_modules/paper/dist/paper-full.js"></script>
 <!-- Define inlined PaperScript associate it with myCanvas -->
 <script type="text/paperscript" canvas="myCanvas">
 
 // ****** Begin JavaScript ****** 
+
+// Function: doNothing
+// Parameters: none
+// Description: Does absolutely nothing
+function doNothing() {
+    // Doing literally nothing
+    // console.log("nothing");
+}
 
 // Function: cellConstructor
 // Parameters: row and column coordinants of cell
@@ -200,25 +210,34 @@ function binaryTree(grid) {
     }
 }
 
-
-//var c = cellConstructor(0, 0);
 var g = gridConstructor(10, 10);
 
-//g.getCell(0, 0).link(g.getCell(0, 1), true);
+drawGrid(g, 200, 20, 20);
 
-//g.getCell(0, 2).link(g.getCell(0, 3), true);
-//console.log(g.getCell(0, 0), g.getCell(1, 0), g.getCell(0, 1));
+//setTimeout(doNothing(), 3000);
+
+
+project.activeLayer.removeChildren();
 
 binaryTree(g);
 
 drawGrid(g, 100, 20, 20);
 
+//setTimeout(project.activeLayer.removeChildren(), 3000); // Only seems to time out displaying an error
+//project.activeLayer.removeChildren(); // Removes what is displayed on canvas
+
 // ****** End JavaScript ****** 
 
 </script>
 </head>
+<div class="header">
+  <h2>Header</h2>
+</div>
 <body>
-<canvas id="myCanvas" resize></canvas>
-<p>Heyo</p>
+<canvas id="myCanvas" class="paperMaze" resize></canvas>
+<!--<p>Heyo</p>-->
 </body>
+<div class="footer">
+  <p>Footer</p>
+</div>
 </html>
