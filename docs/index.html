@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-<!-- Load the Paper.js library -->
-<script type="text/javascript" src="paper-full.js"></script>
-<!-- Define inlined PaperScript associate it with myCanvas -->
-<script type="text/paperscript" src="simpleMaze.js" canvas="myCanvas"></script>
-</head>
-<body>
-<canvas id="myCanvas" resize></canvas>
-<p>Heyo</p>
-</body>
+    <head>
+        <!-- CSS styling-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- Load the Paper.js library -->
+        <script type="text/javascript" src="paper-full.js"></script>
+        <!-- Define inlined PaperScript associate it with myCanvas -->
+        <script type="text/paperscript" src="simpleMaze.js" canvas="myCanvas"></script>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="800" height="500"></canvas>
+        <p>Heyo</p>
+        <img src="ellieface.png" id="playerPic" class="visuallyhidden">
+    </body>
 </html>

@@ -137,22 +137,26 @@ function drawCell(c, size, xCoord, yCoord) {
     
     if (c.north === null) { // Get these lines horizontal
         var northPath = new Path();
-        northPath.strokeColor = 'black';
+        northPath.strokeWidth = 6;
+        northPath.strokeColor = 'purple';
         northPath.add(new Point(x1, y1), new Point(x2, y1));
     }
     if (c.west === null) {
         var westPath = new Path();
-        westPath.strokeColor = 'black';
+        westPath.strokeColor = 'purple';
+        westPath.strokeWidth = 6;
         westPath.add(new Point(x1, y1), new Point(x1, y2));
     }
     if (c.hasLink(c.south) === false) {
         var southPath = new Path();
-        southPath.strokeColor = 'black';
+        southPath.strokeColor = 'purple';
+        southPath.strokeWidth = 6;
         southPath.add(new Point(x1, y2), new Point(x2, y2));
     }
     if (c.hasLink(c.east) === false) {
         var eastPath = new Path();
-        eastPath.strokeColor = 'black';
+        eastPath.strokeColor = 'purple';
+        eastPath.strokeWidth = 6;
         eastPath.add(new Point(x2, y1), new Point(x2, y2));
     }
 }
@@ -192,9 +196,63 @@ function binaryTree(grid) {
     }
 }
 
+function createPlayer(pixelSize, startX, startY, startCell) {
+    var player = {
+        raster: new Raster('playerPic'),
+        currentCell: startCell,
+        x: 0,
+        y: 0,
+        imageSize: pixelSize,
+        startXpos: startX,
+        startYpos: startY,
+        updatePosition: function() {
+//            this.x = xPos;
+//            this.y = yPos;
+        this.raster.position = new Point((this.startXpos * 2 - (this.imageSize * this.x)), (this.startYpos  * 2- (this.imageSize * this.y)));
+            //this.raster.position = new Point((this.startXpos - (this.imageSize), (this.startYpos));
+//            this.raster.position = new Point((this.startXpos + (this.imageSize * this.x)), (this.startYpos + (this.imageSize * this.y)));
+
+        },
+        move: function (direction) {
+            if (direction === "north" && this.currentCell.hasLink(this.currentCell.north) === true) {
+                //alert("north");
+                this.y++;
+                this.currentCell = this.currentCell.north;
+                this.updatePosition();
+            }
+            if (direction === "west" && this.currentCell.hasLink(this.currentCell.west) === true) {
+                //alert("west");
+                this.x++;
+                this.currentCell = this.currentCell.west;
+                this.updatePosition();
+            }
+            if (direction === "south" && this.currentCell.hasLink(this.currentCell.south) === true) {
+                //alert("south");
+                this.y--;
+                this.currentCell = this.currentCell.south;
+                this.updatePosition();
+            }
+            if (direction === "east" && this.currentCell.hasLink(this.currentCell.east) === true) {
+                //alert("east");
+                this.x--;
+                this.currentCell = this.currentCell.east;
+                this.updatePosition();
+            }
+        }
+
+    }
+    
+    player.raster.width = pixelSize;
+    player.raster.height = pixelSize;
+    player.raster.position = new Point((startX * 2), (startY * 2));
+    
+    
+    return player;
+}
+
 
 //var c = cellConstructor(0, 0);
-var g = gridConstructor(10, 10);
+var g = gridConstructor(10, 18);
 
 //g.getCell(0, 0).link(g.getCell(0, 1), true);
 
@@ -203,6 +261,28 @@ var g = gridConstructor(10, 10);
 
 binaryTree(g);
 
-drawGrid(g, 100, 20, 20);
+drawGrid(g, 400, 20, 20);
+
+var player = createPlayer(40, 20, 20, g.getCell(0,0));
+
+//player.updatePosition(20, 20);
+
+function onKeyDown(event) {
+    var move = true;
+    if (event.key === "up" && move === true) {
+        player.move("north");
+    }
+    if (event.key === "left" && move === true) {
+        player.move("west");
+    }
+    if (event.key === "right" && move === true) {
+        player.move("east");
+    }
+    if (event.key === "down" && move === true) {
+        player.move("south");
+    }
+}
+
+
 
 // ****** End JavaScript ****** 
