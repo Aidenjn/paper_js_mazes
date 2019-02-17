@@ -127,16 +127,16 @@ function checkWin(player, goal) {
 }
 
 // Add images to page
-var playerImage = new Image();
-playerImage.src = "images/ellieFace.png";
-playerImage.id = "playerPic";
-playerImage.class = "visuallyhidden"
-document.body.appendChild(playerImage);
-var goalImage = new Image();
-goalImage.src = "images/dumplin.png";
-goalImage.id = "goalPic";
-goalImage.class = "visuallyhidden";
-document.body.appendChild(goalImage);
+//var playerImage = new Image();
+//playerImage.src = "images/ellieFace.png";
+//playerImage.id = "playerPic";
+//playerImage.class = "visuallyhidden"
+//document.body.appendChild(playerImage);
+//var goalImage = new Image();
+//goalImage.src = "images/dumplin.png";
+//goalImage.id = "goalPic";
+//goalImage.class = "visuallyhidden";
+//document.body.appendChild(goalImage);
 
 // game variables
 var maze_rows = 10;
