@@ -3,14 +3,29 @@
     <head>
         <!-- CSS styling-->
         <link rel="stylesheet" type="text/css" href="style.css">
+        
+        <!-- Load files that define the logic of maze making -->
+        <script type="text/javascript" src="js_files/cell.js"></script>
+        <script type="text/javascript" src="js_files/grid.js"></script>
+        <script type="text/javascript" src="js_files/maze_algorithms.js"></script>
+        <script type="text/javascript" src="js_files/player.js"></script>
+        
         <!-- Load the Paper.js library -->
-        <script type="text/javascript" src="paper-full.js"></script>
+        <script type="text/javascript" src="js_files/paper-full.js"></script>
+        
         <!-- Define inlined PaperScript associate it with myCanvas -->
-        <script type="text/paperscript" src="simpleMaze.js" canvas="myCanvas"></script>
+        <script type="text/paperscript" src="js_files/main.js" canvas="myCanvas"></script>
+        
     </head>
     <body>
+        <!-- Canvas that contains the maze -->
         <canvas id="myCanvas" width="800" height="500"></canvas>
-        <p>Heyo</p>
+        
+        <!-- Image for the player -->
         <img src="ellieface.png" id="playerPic" class="visuallyhidden">
+        
+        <!-- Image for the goal -->
+        <img src="ellieface.png" id="goalPic" class="visuallyhidden">
+        
     </body>
 </html>
