@@ -112,6 +112,9 @@ function createGoalSprite(goal, size, image, gridX, gridY) {
     return gSprite;
 }
 
+
+
+
 // Function: checkWin
 // Parameters: player, goal
 // Description: checks to see if player has reached the goal
