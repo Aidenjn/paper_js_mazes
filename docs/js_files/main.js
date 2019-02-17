@@ -61,7 +61,7 @@ function drawGrid(grid, size, xCoord, yCoord) {
 // Description: Creates the sprite image representing the player
 function createPlayerSprite(player, size, image, xCoord, yCoord) {
     var pSprite = {
-        raster: new Raster('playerPic'),
+        raster: new Raster('playerPic', 1000),
         playerObj: player,
         imageSize: size,
         startXpos: xCoord,
@@ -87,38 +87,94 @@ function createPlayerSprite(player, size, image, xCoord, yCoord) {
     return pSprite;
 }
 
+// Function: createGoalSprite
+// Parameters: goal object, size of goal in pixels, image being used for goal sprite
+// Description: Creates the sprite image representing the goal
+function createGoalSprite(goal, size, image, gridX, gridY) {
+    var gSprite = {
+        raster: new Raster('goalPic', 1000),
+        goalObj: goal,
+        imageSize: size,
+        startXpos: gridX,
+        startYpos: gridY,
+        // Function: init
+        // Parameters: none
+        // Description: initializes sprite object
+        init: function() {
+            this.raster.width = this.imageSize;
+            this.raster.height = this.imageSize;
+            var xLocation = this.startXpos * 2 + (this.imageSize * this.goalObj.x);
+            var yLocation = this.startYpos * 2 + (this.imageSize * this.goalObj.y);
+            this.raster.position = new Point(xLocation, yLocation);
+        }
+    }
+    gSprite.init();
+    return gSprite;
+}
+
+// Function: checkWin
+// Parameters: player, goal
+// Description: checks to see if player has reached the goal
+function checkWin(player, goal) {
+    pX = player.currentCell.column;
+    pY = player.currentCell.row;
+    gX = goal.residingCell.column;
+    gY = goal.residingCell.row;
+    
+    if (pX == gX && pY == gY) {
+        alert("Yum!");
+    }
+}
+
+
+// game variables
+var maze_rows = 10;
+var maze_columns = 18;
+var player_start_x = 0;
+var player_start_y = 0;
+var goal_location_x = maze_rows - 1;
+var goal_location_y = maze_columns - 1;
+
+// render variables
+var maze_position_x = 20;
+var maze_position_y = 20;
+var maze_pixel_width = 400;
+
 // Create grid object
-var g = gridConstructor(10, 18);
+var g = gridConstructor(maze_rows, maze_columns);
 
 // Turn grid into binary tree maze
 binaryTree(g);
 
 // Draw maze
-drawGrid(g, 400, 20, 20);
+drawGrid(g, maze_pixel_width, maze_position_x, maze_position_y);
 
-// Create player object
-var player = playerConstructor(g.getCell(0,0));
+// Create game objects
+var player = playerConstructor(g.getCell(player_start_x, player_start_y));
+var goal = goalConstructor(g.getCell(goal_location_x, goal_location_y));
 
-// Create player sprite
-var sprite = createPlayerSprite(player, 40, "playerPic", 20, 20)
+// Create game sprites
+var playerSprite = createPlayerSprite(player, (maze_pixel_width / maze_rows), "playerPic", maze_position_x, maze_position_y);
+var goalSprite = createGoalSprite(goal, (maze_pixel_width / maze_rows), "goalPic", maze_position_x, maze_position_y);
 
 // Player controls
 function onKeyDown(event) {
     var move = true;
     if (event.key === "up" && move === true) {
         player.move("north");
-        sprite.updatePosition();
+        playerSprite.updatePosition();
     }
     if (event.key === "left" && move === true) {
         player.move("west");
-        sprite.updatePosition();
+        playerSprite.updatePosition();
     }
     if (event.key === "right" && move === true) {
         player.move("east");
-        sprite.updatePosition();
+        playerSprite.updatePosition();
     }
     if (event.key === "down" && move === true) {
         player.move("south");
-        sprite.updatePosition();
+        playerSprite.updatePosition();
     }
+    checkWin(player, goal);
 }
