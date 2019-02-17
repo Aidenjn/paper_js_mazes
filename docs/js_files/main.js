@@ -61,7 +61,7 @@ function drawGrid(grid, size, xCoord, yCoord) {
 // Description: Creates the sprite image representing the player
 function createPlayerSprite(player, size, image, xCoord, yCoord) {
     var pSprite = {
-        raster: new Raster('playerPic', 1000),
+        raster: new Raster('playerPic'),
         playerObj: player,
         imageSize: size,
         startXpos: xCoord,
@@ -92,7 +92,7 @@ function createPlayerSprite(player, size, image, xCoord, yCoord) {
 // Description: Creates the sprite image representing the goal
 function createGoalSprite(goal, size, image, gridX, gridY) {
     var gSprite = {
-        raster: new Raster('goalPic', 1000),
+        raster: new Raster('goalPic'),
         goalObj: goal,
         imageSize: size,
         startXpos: gridX,
