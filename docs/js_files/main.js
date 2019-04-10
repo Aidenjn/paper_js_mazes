@@ -1,4 +1,4 @@
-/********************************************************************* 
+/*********************************************************************
 ** Filename: main.js
 ** Author: Aiden Nelson
 ** Date: 2/16/2019
@@ -10,12 +10,12 @@
 // Parameters: cell object, size of cell in pixels, x & y coordinates of cell
 // Description: Draw graphical representation of cell
 function drawCell(c, size, xCoord, yCoord) {
-  
+
     var x1 = yCoord;
     var y1 = xCoord;
     var x2 = yCoord + size;
     var y2 = xCoord + size;
-    
+
     if (c.north === null) { // Get these lines horizontal
         var northPath = new Path();
         northPath.strokeWidth = 6;
@@ -119,7 +119,7 @@ function checkWin(player, goal) {
     pY = player.currentCell.row;
     gX = goal.residingCell.column;
     gY = goal.residingCell.row;
-    
+
     if (pX == gX && pY == gY) {
         alert("Yum!");
         window.location.reload();
@@ -141,7 +141,7 @@ var maze_position_y = 20;
 var maze_pixel_width = 400;
 
 // Create grid object
-var g = gridConstructor(maze_rows, maze_columns);
+var g = new Grid(maze_rows, maze_columns);
 
 // Turn grid into binary tree maze
 binaryTree(g);

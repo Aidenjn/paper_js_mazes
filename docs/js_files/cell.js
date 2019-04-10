@@ -5,7 +5,7 @@
 ** Description: Class for maze cells
 *********************************************************************/
 
-class Cell(r,c) {
+class Cell {
 
     // Function: cellConstructor
     // Parameters: row and column coordinants of cell
@@ -13,12 +13,12 @@ class Cell(r,c) {
     constructor(row, column) {
         this.row = row;
         this.column = column;
-        links = {};
-        type = "Normal";
-        north = null;
-        east = null;
-        south = null;
-        west = null;
+        this.links = {};
+        this.type = "Normal";
+        this.north = null;
+        this.east = null;
+        this.south = null;
+        this.west = null;
     }
 
     // Function: getKey
