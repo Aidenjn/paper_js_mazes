@@ -150,8 +150,8 @@ binaryTree(g);
 drawGrid(g, maze_pixel_width, maze_position_x, maze_position_y);
 
 // Create game objects
-var player = playerConstructor(g.getCell(player_start_x, player_start_y));
-var goal = goalConstructor(g.getCell(goal_location_x, goal_location_y));
+var player = new Player(g.getCell(player_start_x, player_start_y));
+var goal = new Goal(g.getCell(goal_location_x, goal_location_y));
 
 // Create game sprites
 var playerSprite = createPlayerSprite(player, (maze_pixel_width / maze_rows), "playerPic", maze_position_x, maze_position_y);

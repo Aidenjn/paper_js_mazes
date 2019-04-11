@@ -7,7 +7,7 @@
 
 class Cell {
 
-    // Function: cellConstructor
+    // Function: constructor
     // Parameters: row and column coordinants of cell
     // Description: Returns a maze cell object
     constructor(row, column) {

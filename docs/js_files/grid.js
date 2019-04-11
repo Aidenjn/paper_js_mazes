@@ -7,7 +7,7 @@
 
 class Grid {
 
-    // Function: gridConstructor
+    // Function: constructor
     // Parameters: Amount of rows and columns for new grid
     // Description: Returns a maze grid object
     constructor(rows, columns) {
