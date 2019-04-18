@@ -1,21 +1,55 @@
-/********************************************************************* 
+/*********************************************************************
 ** Filename: main.js
 ** Author: Aiden Nelson
 ** Date: 2/16/2019
 ** Description: Main control for maze game. Contains all paper.js rendering.
 *********************************************************************/
 
+class PlayerSprite {
+
+    // Function: constructor
+    // Parameters: player object, size of player in pixels, image being used for player sprite
+    // Description: Creates the sprite image representing the player
+    constructor(player, size, image, xCoord, yCoord) {
+        this.raster = new Raster(image);
+        this.playerObj = player;
+        this.imageSize = size;
+        this.startXpos = xCoord;
+        this.startYpos = yCoord;
+        this.init();
+    }
+
+    // Function: updatePosition
+    // Parameters: none
+    // Description: updates sprite position to player object position
+    updatePosition() {
+        var xLocation = this.startXpos * 2 - (this.imageSize * this.playerObj.x);
+        var yLocation = this.startYpos  * 2 - (this.imageSize * this.playerObj.y);
+        this.raster.position = new Point(xLocation, yLocation);
+    }
+
+    // Function: init
+    // Parameters: none
+    // Description: initializes sprite object
+    init() {
+        this.raster.width = this.imageSize;
+        this.raster.height = this.imageSize;
+        this.raster.position = new Point((xCoord * 2), (yCoord * 2));
+    }
+}
+
+
 
 // Function: drawCell
 // Parameters: cell object, size of cell in pixels, x & y coordinates of cell
 // Description: Draw graphical representation of cell
 function drawCell(c, size, xCoord, yCoord) {
-  
+
     var x1 = yCoord;
     var y1 = xCoord;
     var x2 = yCoord + size;
     var y2 = xCoord + size;
-    
+
     if (c.north === null) { // Get these lines horizontal
         var northPath = new Path();
         northPath.strokeWidth = 6;
@@ -55,37 +89,6 @@ function drawGrid(grid, size, xCoord, yCoord) {
     }
 }
 
-// Function: createPlayerSprite
-// Parameters: player object, size of player in pixels, image being used for player sprite
-// Description: Creates the sprite image representing the player
-function createPlayerSprite(player, size, image, xCoord, yCoord) {
-    var pSprite = {
-        raster: new Raster('playerPic'),
-        playerObj: player,
-        imageSize: size,
-        startXpos: xCoord,
-        startYpos: yCoord,
-        // Function: updatePosition
-        // Parameters: none
-        // Description: updates sprite position to player object position
-        updatePosition: function() {
-            var xLocation = this.startXpos * 2 - (this.imageSize * this.playerObj.x);
-            var yLocation = this.startYpos  * 2 - (this.imageSize * this.playerObj.y);
-            this.raster.position = new Point(xLocation, yLocation);
-        },
-        // Function: init
-        // Parameters: none
-        // Description: initializes sprite object
-        init: function() {
-            this.raster.width = this.imageSize;
-            this.raster.height = this.imageSize;
-            this.raster.position = new Point((xCoord * 2), (yCoord * 2));
-        }
-    }
-    pSprite.init();
-    return pSprite;
-}
-
 // Function: createGoalSprite
 // Parameters: goal object, size of goal in pixels, image being used for goal sprite
 // Description: Creates the sprite image representing the goal
@@ -119,7 +122,7 @@ function checkWin(player, goal) {
     pY = player.currentCell.row;
     gX = goal.residingCell.column;
     gY = goal.residingCell.row;
-    
+
     if (pX == gX && pY == gY) {
         alert("Yum!");
         window.location.reload();
@@ -141,7 +144,7 @@ var maze_position_y = 20;
 var maze_pixel_width = 400;
 
 // Create grid object
-var g = gridConstructor(maze_rows, maze_columns);
+var g = new Grid(maze_rows, maze_columns);
 
 // Turn grid into binary tree maze
 binaryTree(g);
@@ -150,11 +153,11 @@ binaryTree(g);
 drawGrid(g, maze_pixel_width, maze_position_x, maze_position_y);
 
 // Create game objects
-var player = playerConstructor(g.getCell(player_start_x, player_start_y));
-var goal = goalConstructor(g.getCell(goal_location_x, goal_location_y));
+var player = new Player(g.getCell(player_start_x, player_start_y));
+var goal = new Goal(g.getCell(goal_location_x, goal_location_y));
 
 // Create game sprites
-var playerSprite = createPlayerSprite(player, (maze_pixel_width / maze_rows), "playerPic", maze_position_x, maze_position_y);
+var playerSprite = new PlayerSprite(player, (maze_pixel_width / maze_rows), "playerPic", maze_position_x, maze_position_y);
 var goalSprite = createGoalSprite(goal, (maze_pixel_width / maze_rows), "goalPic", maze_position_x, maze_position_y);
 
 // Player controls
