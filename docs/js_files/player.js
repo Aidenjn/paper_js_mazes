@@ -19,9 +19,9 @@ class Player {
     // Function: move
     // Parameters: direction of player movement
     // Description: Moves player to specified adjacent cell if there is a link to it
-    move (direction) {
+    move(direction) {
         if (direction === "north" && this.currentCell.hasLink(this.currentCell.north) === true) {
-            //alert("north");
+            alert("north");
             this.y++;
             this.currentCell = this.currentCell.north;
         }

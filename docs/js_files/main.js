@@ -5,6 +5,40 @@
 ** Description: Main control for maze game. Contains all paper.js rendering.
 *********************************************************************/
 
+class PlayerSprite {
+
+    // Function: constructor
+    // Parameters: player object, size of player in pixels, image being used for player sprite
+    // Description: Creates the sprite image representing the player
+    constructor(player, size, image, xCoord, yCoord) {
+        this.raster = new Raster(image);
+        this.playerObj = player;
+        this.imageSize = size;
+        this.startXpos = xCoord;
+        this.startYpos = yCoord;
+        this.init();
+    }
+
+    // Function: updatePosition
+    // Parameters: none
+    // Description: updates sprite position to player object position
+    updatePosition() {
+        var xLocation = this.startXpos * 2 - (this.imageSize * this.playerObj.x);
+        var yLocation = this.startYpos  * 2 - (this.imageSize * this.playerObj.y);
+        this.raster.position = new Point(xLocation, yLocation);
+    }
+
+    // Function: init
+    // Parameters: none
+    // Description: initializes sprite object
+    init() {
+        this.raster.width = this.imageSize;
+        this.raster.height = this.imageSize;
+        this.raster.position = new Point((xCoord * 2), (yCoord * 2));
+    }
+}
+
+
 
 // Function: drawCell
 // Parameters: cell object, size of cell in pixels, x & y coordinates of cell
@@ -53,37 +87,6 @@ function drawGrid(grid, size, xCoord, yCoord) {
             drawCell(grid.getCell(x, y), cellSize, xCoord + (cellSize * x), yCoord + (cellSize * y));
         }
     }
-}
-
-// Function: createPlayerSprite
-// Parameters: player object, size of player in pixels, image being used for player sprite
-// Description: Creates the sprite image representing the player
-function createPlayerSprite(player, size, image, xCoord, yCoord) {
-    var pSprite = {
-        raster: new Raster('playerPic'),
-        playerObj: player,
-        imageSize: size,
-        startXpos: xCoord,
-        startYpos: yCoord,
-        // Function: updatePosition
-        // Parameters: none
-        // Description: updates sprite position to player object position
-        updatePosition: function() {
-            var xLocation = this.startXpos * 2 - (this.imageSize * this.playerObj.x);
-            var yLocation = this.startYpos  * 2 - (this.imageSize * this.playerObj.y);
-            this.raster.position = new Point(xLocation, yLocation);
-        },
-        // Function: init
-        // Parameters: none
-        // Description: initializes sprite object
-        init: function() {
-            this.raster.width = this.imageSize;
-            this.raster.height = this.imageSize;
-            this.raster.position = new Point((xCoord * 2), (yCoord * 2));
-        }
-    }
-    pSprite.init();
-    return pSprite;
 }
 
 // Function: createGoalSprite
@@ -154,7 +157,7 @@ var player = new Player(g.getCell(player_start_x, player_start_y));
 var goal = new Goal(g.getCell(goal_location_x, goal_location_y));
 
 // Create game sprites
-var playerSprite = createPlayerSprite(player, (maze_pixel_width / maze_rows), "playerPic", maze_position_x, maze_position_y);
+var playerSprite = new PlayerSprite(player, (maze_pixel_width / maze_rows), "playerPic", maze_position_x, maze_position_y);
 var goalSprite = createGoalSprite(goal, (maze_pixel_width / maze_rows), "goalPic", maze_position_x, maze_position_y);
 
 // Player controls
