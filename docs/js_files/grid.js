@@ -65,6 +65,13 @@ class Grid {
                 this.cells[x][y].east = this.getCell(row, (col + 1));
                 this.cells[x][y].south = this.getCell((row + 1), col);
                 this.cells[x][y].west = this.getCell(row, (col - 1));
+
+                /*
+                this.cells[x][y].north = this.getCell((col - 1), row);
+                this.cells[x][y].east = this.getCell(col, (row + 1));
+                this.cells[x][y].south = this.getCell((col + 1), row);
+                this.cells[x][y].west = this.getCell(col, (row - 1));
+                */
             }
         }
     }

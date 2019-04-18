@@ -20,8 +20,9 @@ class Player {
     // Parameters: direction of player movement
     // Description: Moves player to specified adjacent cell if there is a link to it
     move(direction) {
+        // NOTE: West movement should -- and east should ++. Need to work on map orientation
         if (direction === "north" && this.currentCell.hasLink(this.currentCell.north) === true) {
-            alert("north");
+            //alert("north");
             this.y++;
             this.currentCell = this.currentCell.north;
         }

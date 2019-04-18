@@ -101,7 +101,9 @@ class Game {
     // Description: checks to see if the player has reached the goal
     checkWin() {
         console.log("player(" + this.player.x + ", " + this.player.y + ")  goal(" + this.goal.x + ", " + this.goal.y + ")");
-        if (this.player.x == this.goal.x && this.player.y == this.goal.y) {
+        // Reversing coordinates because it won't work otherwise
+        // THIS IS A TEMPORARY FIX
+        if (-(this.player.x) == this.goal.x && -(this.player.y) == this.goal.y) {
             alert("Yum!");
             window.location.reload();
         }
