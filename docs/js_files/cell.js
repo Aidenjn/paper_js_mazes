@@ -10,7 +10,7 @@ class Cell {
     // Function: constructor
     // Parameters: row and column coordinants of cell
     // Description: Returns a maze cell object
-    constructor(row, column) {
+    constructor(column, row) {
         this.row = row;
         this.column = column;
         this.links = {};
@@ -25,7 +25,7 @@ class Cell {
     // Parameters: none
     // Description: Returns a unique key for the cell
     getKey() {
-        return (String(this.row) + "," + String(this.column));
+        return (String(this.column) + "," + String(this.row));
         //return "dog";
     }
 
