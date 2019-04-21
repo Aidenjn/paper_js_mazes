@@ -84,15 +84,15 @@ class MazeSprite {
         // Calculate bottom left of cell
         var cellSize = size / grid.rows;
         var bottomLeftY = yCoord + size;
-        yCoord = bottomLeftY;
+        var canvasX = 0;
+        var canvasY = 0;
 
-        var cellSize = size / grid.rows;
+        // Drawing begins from bottom left corner, one column at a time
         for (var x = 0; x < grid.columns; x++) {
-        //for (var x = 0; x < 1; x++) {
-            //for (var y = 0; y < 1; y++) {
             for (var y = 0; y < grid.rows; y++) {
-                this.drawCell(grid.getCell(x, y), cellSize, xCoord + (cellSize * x), yCoord - (cellSize * y));
-                //this.drawCell(grid.getCell(x, y), cellSize, xCoord + (cellSize * x), yCoord + (cellSize * y));
+                canvasX = xCoord + (cellSize * x);
+                canvasY = bottomLeftY - (cellSize * y);
+                this.drawCell(grid.getCell(x, y), cellSize, canvasX, canvasY);
             }
         }
     }

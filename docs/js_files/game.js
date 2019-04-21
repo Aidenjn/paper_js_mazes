@@ -43,12 +43,14 @@ class Game {
     // Description: Sets up game sprites
     setupVisuals(mazeHeight, positionX, positionY) {
 
+        var bottomLeftY = mazeHeight / this.grid.rows;
+
         // Draw maze
         this.mazeSprite = new MazeSprite(this.grid, mazeHeight, positionX, positionY);
 
         // Create game sprites
-        this.playerSprite = new PlayerSprite(this.player, (mazeHeight / this.mazeRows), "playerPic", positionX, positionY);
-        this.goalSprite = new GoalSprite(this.goal, (mazeHeight / this.mazeRows), "goalPic", positionX, positionY);
+        this.playerSprite = new PlayerSprite(this.player, (mazeHeight / this.mazeRows), "playerPic", mazeHeight, positionX, positionY);
+        this.goalSprite = new GoalSprite(this.goal, (mazeHeight / this.mazeRows), "goalPic", mazeHeight, positionX, positionY + mazeHeight - 1);
 
     }
 
@@ -103,10 +105,8 @@ class Game {
     // Parameters: none
     // Description: checks to see if the player has reached the goal
     checkWin() {
-        console.log("player(" + this.player.x + ", " + this.player.y + ")  goal(" + this.goal.x + ", " + this.goal.y + ")");
-        // Reversing coordinates because it won't work otherwise
-        // THIS IS A TEMPORARY FIX
-        if (-(this.player.x) == this.goal.x && -(this.player.y) == this.goal.y) {
+        //console.log("player(" + this.player.x + ", " + this.player.y + ")  goal(" + this.goal.x + ", " + this.goal.y + ")");
+        if (this.player.x == this.goal.x && this.player.y == this.goal.y) {
             alert("Yum!");
             window.location.reload();
         }

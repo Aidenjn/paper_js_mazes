@@ -28,7 +28,7 @@ class Player {
         }
         if (direction === "west" && this.currentCell.hasLink(this.currentCell.west) === true) {
             //alert("west");
-            this.x++;
+            this.x--;
             this.currentCell = this.currentCell.west;
         }
         if (direction === "south" && this.currentCell.hasLink(this.currentCell.south) === true) {
@@ -38,7 +38,7 @@ class Player {
         }
         if (direction === "east" && this.currentCell.hasLink(this.currentCell.east) === true) {
             //alert("east");
-            this.x--;
+            this.x++;
             this.currentCell = this.currentCell.east;
         }
     }
