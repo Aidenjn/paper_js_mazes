@@ -19,8 +19,8 @@ class GoalSprite {
     init() {
         this.raster.width = this.spriteWidth;
         this.raster.height = this.spriteWidth;
-        var xLocation = this.startXpos * 2 + (this.spriteWidth * this.goalObj.x);
-        var yLocation = this.mazeHeight - (this.spriteWidth * this.goalObj.y);
+        var xLocation = this.startXpos + this.spriteWidth/2 + (this.spriteWidth * this.goalObj.x);
+        var yLocation = this.startYpos - this.spriteWidth/2 + this.mazeHeight - (this.spriteWidth * this.goalObj.y);
         this.raster.position = new Point(xLocation, yLocation);
     }
 }

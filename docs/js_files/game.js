@@ -50,7 +50,7 @@ class Game {
 
         // Create game sprites
         this.playerSprite = new PlayerSprite(this.player, (mazeHeight / this.mazeRows), "playerPic", mazeHeight, positionX, positionY);
-        this.goalSprite = new GoalSprite(this.goal, (mazeHeight / this.mazeRows), "goalPic", mazeHeight, positionX, positionY + mazeHeight - 1);
+        this.goalSprite = new GoalSprite(this.goal, (mazeHeight / this.mazeRows), "goalPic", mazeHeight, positionX, positionY);
 
     }
 
