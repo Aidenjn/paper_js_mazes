@@ -20,8 +20,9 @@ class PlayerSprite {
     // Parameters: none
     // Description: updates sprite position to player object position
     updatePosition(x, y) {
-        var canvasX = this.startXpos * 2 + (this.spriteWidth * x);
-        var canvasY = this.mazeHeight - (this.spriteWidth * y);
+        // maze position, sprite width, grid places over
+        var canvasX = this.startXpos + this.spriteWidth/2 + (this.spriteWidth * x);
+        var canvasY = this.startYpos - this.spriteWidth/2 + this.mazeHeight - (this.spriteWidth * y);
 
         this.raster.position = new Point(canvasX, canvasY);
     }

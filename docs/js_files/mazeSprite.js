@@ -30,7 +30,13 @@ class MazeSprite {
         var x2 = yCoord + size;
         var y2 = xCoord + size;
 */
+        // Thickness of lines that draw the cells
+        var lineThickness = 0.15 * size;
+        // Extra length added to lines in order to make corners look nice
+        var cornerFlushing = lineThickness/2;
 
+        // (x1, y2)  (x2, y2)
+        // (x1, y1)  (x2, y1)
 
         var x1 = xCoord;
         var y1 = yCoord;
@@ -43,28 +49,28 @@ class MazeSprite {
 
         if (c.north === null) { // Get these lines horizontal
             var northPath = new Path();
-            northPath.strokeWidth = 6;
+            northPath.strokeWidth = lineThickness;
             northPath.strokeColor = 'purple';
             //northPath.add(new Point(x1, y1), new Point(x2, y1));
-            northPath.add(new Point(x2, y2), new Point(x1, y2));
+            northPath.add(new Point(x2 + cornerFlushing, y2), new Point(x1 - cornerFlushing, y2));
         }
         if (c.west === null) {
             var westPath = new Path();
             westPath.strokeColor = 'purple';
-            westPath.strokeWidth = 6;
+            westPath.strokeWidth = lineThickness;
             westPath.add(new Point(x1, y1), new Point(x1, y2));
         }
         if (c.hasLink(c.south) === false) {
             var southPath = new Path();
             southPath.strokeColor = 'purple';
-            southPath.strokeWidth = 6;
+            southPath.strokeWidth = lineThickness;
             //southPath.add(new Point(x1, y2), new Point(x2, y2));
-            southPath.add(new Point(x1, y1), new Point(x2, y1));
+            southPath.add(new Point(x1 - cornerFlushing, y1), new Point(x2 + cornerFlushing, y1));
         }
         if (c.hasLink(c.east) === false) {
             var eastPath = new Path();
             eastPath.strokeColor = 'purple';
-            eastPath.strokeWidth = 6;
+            eastPath.strokeWidth = lineThickness;
             eastPath.add(new Point(x2, y1), new Point(x2, y2));
         }
 
@@ -72,7 +78,7 @@ class MazeSprite {
         var text = new PointText(new Point(centerX, centerY));
         text.justification = 'center';
         text.fillColor = 'black';
-        text.content = "(" + c.column + ", " + c.row + ")";
+        //text.content = "(" + c.column + ", " + c.row + ")";
 
     }
 
