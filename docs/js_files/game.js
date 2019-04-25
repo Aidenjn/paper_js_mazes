@@ -49,8 +49,9 @@ class Game {
         this.mazeSprite = new MazeSprite(this.grid, mazeHeight, positionX, positionY);
 
         // Create game sprites
-        this.playerSprite = new PlayerSprite(this.player, (mazeHeight / this.mazeRows), "playerPic", mazeHeight, positionX, positionY);
-        this.goalSprite = new GoalSprite(this.goal, (mazeHeight / this.mazeRows), "goalPic", mazeHeight, positionX, positionY);
+        var standardSpriteWidth = mazeHeight / this.mazeRows;
+        this.playerSprite = new CellContentSprite(standardSpriteWidth, "playerPic", mazeHeight, positionX, positionY, this.player.x, this.player.y);
+        this.goalSprite = new CellContentSprite(standardSpriteWidth, "goalPic", mazeHeight, positionX, positionY, this.goal.x, this.goal.y);
 
     }
 
