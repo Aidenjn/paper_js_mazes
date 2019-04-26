@@ -12,8 +12,8 @@ class Player {
     // Description: Creates a player that will navigate a grid
     constructor(startCell) {
         this.currentCell = startCell;
-        this.x = startCell.row;
-        this.y = startCell.column;
+        this.x = startCell.column;
+        this.y = startCell.row;
     }
 
     // Function: move

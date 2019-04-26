@@ -31,10 +31,16 @@ class Game {
         this.player = new Player(this.grid.getCell(this.playerStartX, this.playerStartY));
         this.goal = new Goal(this.grid.getCell(this.goalLocationX, this.goalLocationY));
 
+        // Experimental extra moving player
+        //this.npc = new Player(this.grid.getCell(this.playerStartX + 3, this.playerStartY));
+
         // Uninitialized sprite objects
         this.mazeSprite = null;
         this.playerSprite = null;
         this.goalSprite = null;
+
+        // Experimental
+        //this.npcSprite = null;
 
     }
 
@@ -53,13 +59,27 @@ class Game {
         this.playerSprite = new CellContentSprite(standardSpriteWidth, "playerPic", mazeHeight, positionX, positionY, this.player.x, this.player.y);
         this.goalSprite = new CellContentSprite(standardSpriteWidth, "goalPic", mazeHeight, positionX, positionY, this.goal.x, this.goal.y);
 
+        // Experimental extra moving player
+        //this.npcSprite = new CellContentSprite(standardSpriteWidth, "playerPic", mazeHeight, positionX, positionY, this.npc.x, this.npc.y);
+
+
     }
 
     // Function: start
     // Parameters:
     // Description: Starts game
     start() {
-        // Empty
+        // NPC movement below
+        /*
+        var that = this;
+        window.setInterval( function() {
+            //that.moveNPC();
+            console.log("npc moved X:" + that.npc.x + "Y:" + that.npc.y);
+            that.npc.move("north");
+            that.npcSprite.updatePosition(that.npc.x, that.npc.y);
+            view.draw();
+        }, 2000 );
+        */
     }
 
     // Function: run
@@ -82,22 +102,18 @@ class Game {
     // Description: Maps player inputs to appropriate game actions
     handleInput(input) {
         if (input == "up") {
-            //alert(input);
             this.player.move("north");
-            this.playerSprite.updatePosition(this.player.x, this.player.y);
         }
-        if (input == "left") {
+        else if (input == "left") {
             this.player.move("west");
-            this.playerSprite.updatePosition(this.player.x, this.player.y);
         }
-        if (input == "right") {
+        else if (input == "right") {
             this.player.move("east");
-            this.playerSprite.updatePosition(this.player.x, this.player.y);
         }
-        if (input == "down") {
+        else if (input == "down") {
             this.player.move("south");
-            this.playerSprite.updatePosition(this.player.x, this.player.y);
         }
+        this.playerSprite.updatePosition(this.player.x, this.player.y);
         view.draw();
         this.checkWin();
     }
@@ -109,6 +125,8 @@ class Game {
         //console.log("player(" + this.player.x + ", " + this.player.y + ")  goal(" + this.goal.x + ", " + this.goal.y + ")");
         if (this.player.x == this.goal.x && this.player.y == this.goal.y) {
             alert("Yum!");
+
+            //alert("player(" + this.npc.x + ", " + this.npc.y + ")  goal(" + this.goal.x + ", " + this.goal.y + ")");
             window.location.reload();
         }
     }
