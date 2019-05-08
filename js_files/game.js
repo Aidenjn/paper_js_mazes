@@ -54,10 +54,16 @@ class Game {
         // Draw maze
         this.mazeSprite = new MazeSprite(this.grid, mazeHeight, positionX, positionY);
 
+        // Image paths
+        var playerImage = "images/ellieFace.png";
+        var goalImage = "images/dumplin.png";
+        //var goalImage = "";
+
         // Create game sprites
         var standardSpriteWidth = mazeHeight / this.mazeRows;
-        this.playerSprite = new CellContentSprite(standardSpriteWidth, "playerPic", mazeHeight, positionX, positionY, this.player.x, this.player.y);
-        this.goalSprite = new CellContentSprite(standardSpriteWidth, "goalPic", mazeHeight, positionX, positionY, this.goal.x, this.goal.y);
+        //console.log(standardSpriteWidth);
+        this.playerSprite = new CellContentSprite(standardSpriteWidth, playerImage, mazeHeight, positionX, positionY, this.player.x, this.player.y);
+        this.goalSprite = new CellContentSprite(standardSpriteWidth, goalImage, mazeHeight, positionX, positionY, this.goal.x, this.goal.y);
 
         // Experimental extra moving player
         //this.npcSprite = new CellContentSprite(standardSpriteWidth, "playerPic", mazeHeight, positionX, positionY, this.npc.x, this.npc.y);
